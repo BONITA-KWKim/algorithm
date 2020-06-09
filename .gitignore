@@ -130,7 +130,7 @@ dmypy.json
 
 # custom
 .DS_Store
-.out
+*.out
 temp/
 third-party/
 
