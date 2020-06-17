@@ -2,45 +2,32 @@
 
 LCRSTree::LCRSTree()
 {
-    this->tree = NULL;
+
 }
 
 LCRSTree::~LCRSTree()
 {
-    destory_LCRS_tree(this->tree);
+
 }
 
-LCRSNode *LCRSTree::create_LCRS_node(ElementType input)
+void LCRSTree::version_info (void)
 {
-    LCRSNode *node;
-
-    node = (LCRSNode*)malloc(sizeof(LCRSNode));
-
-    node->left = NULL;
-    node->right = NULL;
-    node->data = input;
-
-    return node;
+    std::cout << "LCSR tree Version 0.1.0" << std::endl;
 }
 
-LCRSNode *LCRSTree::create_LCRS_tree(ElementType input)
+LCRSNode *LCRSTree::create_LCRS_node (ElementType data)
 {
-    this->tree = create_LCRS_node(input);
-
-    return this->tree;
+    return BaseTree::create_node(data);
 }
 
-LCRSNode *LCRSTree::create_LCRS_tree(LCRSNode *input)
+void LCRSTree::destroy_LCRS_node (LCRSNode *node)
 {
-    this->tree = input;
-
-    return this->tree;
+    return BaseTree::destroy_node(node);
 }
 
-
-void LCRSTree::destory_LCRS_tree(LCRSNode *tree)
+void LCRSTree::destroy_LCRS_tree (LCRSNode *node)
 {
-    return;
+    return BaseTree::destroy_tree(node);
 }
 
 void LCRSTree::add_child(LCRSNode *parent, LCRSNode *node)
@@ -56,30 +43,21 @@ void LCRSTree::add_child(LCRSNode *parent, LCRSNode *node)
     }
 }
 
-
-void LCRSTree::print_tree()
+void LCRSTree::print_tree(LCRSNode *node, int depth)
 {
-    if(NULL == this->tree) {
-        std::cout << "tree is empty\n";
+    if(NULL == node)
         return;
+
+    for(int i = 0; depth > i; ++i)
+        std::cout << "-";
+
+    std::cout << node->data << std::endl;
+
+    if(NULL != node->left) {
+        print_tree(node->left, ++depth);
     }
 
-    LCRSNode *first = this->tree;
-    LCRSNode *temp = NULL;
-    while(NULL != first) {
-        temp = first;
-        std::cout << temp->data << " ";
-        while(NULL != temp->right) {
-            temp = temp->right;
-            std::cout << temp->data << " ";
-        }
-        std::cout << std::endl;
-
-        first = first->left;
+    if(NULL != node->right) {
+        print_tree(node->right, depth);
     }
-}
-
-LCRSNode *LCRSTree::get_tree()
-{
-    return this->tree;
 }

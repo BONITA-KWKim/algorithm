@@ -2,34 +2,24 @@
 #define __LCRS_tree_H__
 
 #include <iostream>
+#include "tree-base.h"
 
-typedef char ElementType;
+typedef TreeNode LCRSNode;
 
-typedef struct tagLCRSNode {
-    tagLCRSNode *left;
-    tagLCRSNode *right;
-
-    ElementType data;
-} LCRSNode;
-
-class LCRSTree {
+class LCRSTree: public BaseTree {
 public:
     LCRSTree();
     ~LCRSTree();
 
     LCRSNode *create_LCRS_node(ElementType);
-    LCRSNode *create_LCRS_tree(ElementType);
-    LCRSNode *create_LCRS_tree(LCRSNode *);
-
-    void destory_LCRS_node();
-    void destory_LCRS_tree(LCRSNode *);
+    void destroy_LCRS_node (LCRSNode *);
+    void destroy_LCRS_tree(LCRSNode *);
 
     void add_child(LCRSNode *, LCRSNode *);
-    void print_tree();
+    void print_tree(LCRSNode *, int depth=0);
 
-    LCRSNode *get_tree();
+    void version_info();
 private:
-    LCRSNode *tree;
 };
 
 #endif
