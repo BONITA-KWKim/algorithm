@@ -8,6 +8,7 @@ public:
     ~Sort(){};
 
     virtual void sort(int *arr, int size){};
+    virtual void sort(int *arr, int st, int sp){};
 };
 
 #endif

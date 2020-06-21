@@ -134,3 +134,7 @@ dmypy.json
 temp/
 third-party/
 gtest/
+
+# build system
+mybuild/
+bazel*
