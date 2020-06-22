@@ -1,7 +1,6 @@
 #ifndef __INSERTION_SORT_H__
 #define __INSERTION_SORT_H__
 
-#include <iostream>
 #include "sort.h"
 
 class InsertionSort : public Sort{

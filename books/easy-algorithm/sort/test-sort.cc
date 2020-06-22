@@ -4,6 +4,7 @@
 #include "insertion-sort.h"
 #include "bubble-sort.h"
 #include "selection-sort.h"
+#include "quick-sort.h"
 
 TEST (SORT, SELECTION_SORT_001)
 {
@@ -88,6 +89,21 @@ TEST (SORT, INSERTION_SORT_002)
     int answer[6] = {-9, -8, -7, -6, -4, -3};
 
     sort->sort(test_arr, 6);
+
+    for (int i = 0; sizeof(answer) / sizeof(int) > i; ++i)
+    {
+        EXPECT_EQ(answer[i], test_arr[i]);
+    }
+}
+
+TEST (EXTENDED_SORT, QUICK_SORT_001)
+{
+    Sort *sort = new QuickSort();
+
+    int test_arr[6] = {3, 6, 4, 8, 9, 7};
+    int answer[6] = {3, 4, 6, 7, 8, 9};
+
+    sort->sort(test_arr, 0, 5);
 
     for (int i = 0; sizeof(answer) / sizeof(int) > i; ++i)
     {
