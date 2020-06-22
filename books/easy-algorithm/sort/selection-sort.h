@@ -1,9 +1,6 @@
 #ifndef __SELECTION_SORT_H__
 #define __SELECTION_SORT_H__
 
-#ifdef DEBUG
-#include <iostream>
-#endif
 #include "sort.h"
 
 class SelectionSort : public Sort 
@@ -35,14 +32,6 @@ public:
                 arr[i] = arr[max_idx];
                 arr[max_idx] = tmp;
             }
-#ifdef DEBUG
-            std::cout << i << "th: ";
-            for (int k = 0; 6 > k; ++k)
-            {
-                std::cout << arr[k] << "";
-            }
-            std::cout << std::endl;
-#endif
         }
     };
 };

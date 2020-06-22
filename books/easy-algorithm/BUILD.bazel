@@ -1,0 +1,30 @@
+cc_import (
+	name="gtest",
+	#visibility=["//visibility:public"],
+	hdrs = glob(
+        include = [
+            "gtest/include/**/*.h",
+        ]
+    ),
+	static_library="gtest/libgtest.a",
+)
+
+cc_library (
+    name = "sort_lib",
+    hdrs = glob(["sort/*.h"]),
+)
+
+cc_binary(
+    name = "sort",
+    srcs = ["sort/test-sort.cc"],
+    deps = [
+        ":gtest",
+        ":sort_lib",
+    ],
+    copts = [
+        "-Igtest/include", 
+        "-Igtest/include/gtest",
+        "-Igtest/include/gtest/internal",
+    ],
+    linkstatic = 1,
+)
