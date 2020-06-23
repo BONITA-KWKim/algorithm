@@ -111,6 +111,21 @@ TEST (EXTENDED_SORT, QUICK_SORT_001)
     }
 }
 
+TEST (EXTENDED_SORT, QUICK_SORT_002)
+{
+    Sort *sort = new QuickSort();
+
+    int test_arr[6] = {-3, -6, -4, -8, -9, -7};
+    int answer[6] = {-9, -8, -7, -6, -4, -3};
+
+    sort->sort(test_arr, 0, 5);
+
+    for (int i = 0; sizeof(answer) / sizeof(int) > i; ++i)
+    {
+        EXPECT_EQ(answer[i], test_arr[i]);
+    }
+}
+
 int main (int argc, char *argv[])
 {
     ::testing::InitGoogleTest(&argc, argv);
