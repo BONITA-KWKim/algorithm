@@ -1,4 +1,15 @@
 cc_import (
+	name="benchmark",
+	#visibility=["//visibility:public"],
+	hdrs = glob(
+        include = [
+            "benchmark/include/**/*.h",
+        ]
+    ),
+	static_library="benchmark/libbenchmark.a",
+)
+
+cc_import (
 	name="gtest",
 	#visibility=["//visibility:public"],
 	hdrs = glob(
@@ -25,6 +36,19 @@ cc_binary(
         "-Igtest/include", 
         "-Igtest/include/gtest",
         "-Igtest/include/gtest/internal",
+    ],
+    linkstatic = 1,
+)
+
+cc_binary(
+    name = "benchmark_sort",
+    srcs = ["sort/benchmark-sort.cc"],
+    deps = [
+        ":benchmark",
+        ":sort_lib",
+    ],
+    copts = [
+        "-Ibenchmark/include", 
     ],
     linkstatic = 1,
 )

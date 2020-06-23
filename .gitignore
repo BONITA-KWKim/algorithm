@@ -134,6 +134,7 @@ dmypy.json
 temp/
 third-party/
 gtest/
+benchmark/
 
 # build system
 mybuild/
