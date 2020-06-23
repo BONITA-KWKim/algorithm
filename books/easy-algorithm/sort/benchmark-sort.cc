@@ -56,6 +56,22 @@ static void BM_BubbleSort(benchmark::State& state) {
 // Register the function as a benchmark
 BENCHMARK(BM_BubbleSort);
 
+void test_best_case_bubble_sort (void) {
+    int test_arr[6] = {3, 4, 6, 7, 8, 9};
+
+    Sort *sort = new BubbleSort();
+    sort->sort(test_arr, 6);
+}
+static void BM_Best_Case_BubbleSort(benchmark::State& state) {
+  // Perform setup here
+  for (auto _ : state) {
+    // This code gets timed
+    test_best_case_bubble_sort();
+  }
+}
+// Register the function as a benchmark
+BENCHMARK(BM_Best_Case_BubbleSort);
+
 void test_quick_sort (void) {
     int test_arr[6] = {3, 6, 4, 8, 9, 7};
 
