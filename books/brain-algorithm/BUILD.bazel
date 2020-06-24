@@ -1,0 +1,61 @@
+cc_import (
+	name="benchmark",
+	#visibility=["//visibility:public"],
+	hdrs = glob(
+        include = [
+            "benchmark/include/**/*.h",
+        ]
+    ),
+	static_library="benchmark/libbenchmark.a",
+)
+
+cc_import (
+	name="gtest",
+	#visibility=["//visibility:public"],
+	hdrs = glob(
+        include = [
+            "gtest/include/**/*.h",
+        ]
+    ),
+	static_library="gtest/libgtest.a",
+)
+
+cc_library (
+    name = "tree_lib",
+    hdrs = glob(["data_structure/tree/include/*.h"]),
+)
+
+cc_library (
+    name = "search_lib",
+    hdrs = glob(["search/include/*.h"]),
+)
+
+cc_binary(
+    name = "search",
+    srcs = ["search/test-search.cc"],
+    deps = [
+        ":gtest",
+        ":search_lib",
+    ],
+    copts = [
+        "-Igtest/include", 
+        "-Igtest/include/gtest",
+        "-Igtest/include/gtest/internal",
+        "-Isearch/include", 
+    ],
+    linkstatic = 1,
+)
+
+cc_binary(
+    name = "benchmark_search",
+    srcs = ["search/benchmark-search.cc"],
+    deps = [
+        ":benchmark",
+        ":search_lib",
+    ],
+    copts = [
+        "-Ibenchmark/include", 
+        "-Isearch/include", 
+    ],
+    linkstatic = 1,
+)
