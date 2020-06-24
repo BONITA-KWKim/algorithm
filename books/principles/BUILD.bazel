@@ -27,12 +27,20 @@ cc_library (
 
 cc_library (
     name = "sort_lib",
-    hdrs = glob(["sort/*.h"]),
+    srcs = glob(["sort/libs/*.cc"]),
+    hdrs = glob(["sort/include/*.h"]),
+    copts = [
+        "-Isort/include",
+    ],
 )
 
 cc_library (
     name = "search_lib",
+    srcs = glob(["search/libs/*.cc"]),
     hdrs = glob(["search/include/*.h"]),
+    copts = [
+        "-Isearch/include",
+    ],
 )
 
 cc_binary(
@@ -46,6 +54,7 @@ cc_binary(
         "-Igtest/include", 
         "-Igtest/include/gtest",
         "-Igtest/include/gtest/internal",
+        "-Isort/include", 
     ],
     linkstatic = 1,
 )
@@ -59,6 +68,7 @@ cc_binary(
     ],
     copts = [
         "-Ibenchmark/include", 
+        "-Isort/include", 
     ],
     linkstatic = 1,
 )
