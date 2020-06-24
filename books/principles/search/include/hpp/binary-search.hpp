@@ -5,8 +5,8 @@
 
 class BinarySearch : public BaseSearch {
 public:
-    BinarySearch();
-    ~BinarySearch();
+    BinarySearch(){};
+    ~BinarySearch(){};
 private:  
 };
 
