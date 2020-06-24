@@ -21,14 +21,14 @@ set (BENCHMARK_FILES ${CMAKE_CURRENT_SOURCE_DIR}/benchmark-search.cc)
 add_executable (benchmark_search ${BENCHMARK_FILES})
 target_link_libraries (benchmark_search PUBLIC benchmark)
 
-add_custom_target(run_test
+add_custom_target (run_test
   COMMAND test_search
   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
   COMMENT "run generated test_search in ${CMAKE_CURRENT_BINARY_DIR}"
   SOURCES ${SEARCH_FILES}
 )
 
-add_custom_target(benchmark_test
+add_custom_target (benchmark_test
   COMMAND benchmark_search
   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
   COMMENT "run generated test_search in ${CMAKE_CURRENT_BINARY_DIR}"
