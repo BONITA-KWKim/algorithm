@@ -5,8 +5,8 @@ add_definitions (-std=c++11)
 #set (GTEST_INC ${CMAKE_CURRENT_SOURCE_DIR}/../gtest/include)
 #set (GTEST_LIB ${CMAKE_CURRENT_SOURCE_DIR}/../gtest)
 
-set (BENCHMARK_INC ${CMAKE_CURRENT_SOURCE_DIR}/../benchmark/include)
-set (BENCHMARK_LIB ${CMAKE_CURRENT_SOURCE_DIR}/../benchmark)
+#set (BENCHMARK_INC ${CMAKE_CURRENT_SOURCE_DIR}/../benchmark/include)
+#set (BENCHMARK_LIB ${CMAKE_CURRENT_SOURCE_DIR}/../benchmark)
 
 set (SORT_INC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 set (SORT_LIB ${CMAKE_CURRENT_SOURCE_DIR}/libs)
@@ -21,8 +21,12 @@ set (SORT_SRC ${CMAKE_CURRENT_SOURCE_DIR})
 if (CMAKE_VERSION VERSION_LESS 2.8.11)
   include_directories("${gtest_SOURCE_DIR}/include")
 endif()
-include_directories(${SORT_INC} ${BENCHMARK_INC})
-link_directories(${BENCHMARK_LIB})
+# benchmark
+if (CMAKE_VERSION VERSION_LESS 2.8.11)
+  include_directories("${benchmark_SOURCE_DIR}/include")
+endif()
+include_directories(${SORT_INC})
+#link_directories(${BENCHMARK_LIB})
 
 ## ========== operating ==========
 set (SORT_LIB_FILES ${SORT_LIB}/bubble-sort.cc 

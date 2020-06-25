@@ -20,8 +20,13 @@ set (SEARCH_LIB ${CMAKE_CURRENT_SOURCE_DIR}/libs)
 if (CMAKE_VERSION VERSION_LESS 2.8.11)
   include_directories("${gtest_SOURCE_DIR}/include")
 endif()
-include_directories(${SEARCH_INC} ${BENCHMARK_INC})
-link_directories(${BENCHMARK_LIB})
+# benchmark
+if (CMAKE_VERSION VERSION_LESS 2.8.11)
+  include_directories("${benchmark_SOURCE_DIR}/include")
+endif()
+
+include_directories(${SEARCH_INC})
+#link_directories(${BENCHMARK_LIB})
 
 ## ========== library ==========
 set (SEARCH_LIB_FILES ${SEARCH_LIB}/binary-search.cc ${SEARCH_LIB}/binary-search-tree.cc ${SEARCH_LIB}/sequential-search.cc)
