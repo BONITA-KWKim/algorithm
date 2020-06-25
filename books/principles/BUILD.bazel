@@ -1,104 +1,12 @@
+load("@rules_cc//cc:defs.bzl", "cc_import")
+
 cc_import (
 	name="benchmark",
-	#visibility=["//visibility:public"],
+    visibility=["//visibility:public"],
 	hdrs = glob(
         include = [
-            "benchmark/include/**/*.h",
+            "principles/benchmark/include/**/*.h",
         ]
     ),
 	static_library="benchmark/libbenchmark.a",
-)
-
-cc_import (
-	name="gtest",
-	#visibility=["//visibility:public"],
-	hdrs = glob(
-        include = [
-            "gtest/include/**/*.h",
-        ]
-    ),
-	static_library="gtest/libgtest.a",
-)
-
-cc_library (
-    name = "tree_lib",
-    hdrs = glob(["data_structure/tree/include/*.h"]),
-)
-
-cc_library (
-    name = "sort_lib",
-    srcs = glob(["sort/libs/*.cc"]),
-    hdrs = glob(["sort/include/*.h"]),
-    copts = [
-        "-Isort/include",
-    ],
-)
-
-cc_library (
-    name = "search_lib",
-    srcs = glob(["search/libs/*.cc"]),
-    hdrs = glob(["search/include/*.h"]),
-    copts = [
-        "-Isearch/include",
-    ],
-)
-
-cc_binary(
-    name = "sort",
-    srcs = ["sort/test-sort.cc"],
-    deps = [
-        ":gtest",
-        ":sort_lib",
-    ],
-    copts = [
-        "-Igtest/include", 
-        "-Igtest/include/gtest",
-        "-Igtest/include/gtest/internal",
-        "-Isort/include", 
-    ],
-    linkstatic = 1,
-)
-
-cc_binary(
-    name = "benchmark_sort",
-    srcs = ["sort/benchmark-sort.cc"],
-    deps = [
-        ":benchmark",
-        ":sort_lib",
-    ],
-    copts = [
-        "-Ibenchmark/include", 
-        "-Isort/include", 
-    ],
-    linkstatic = 1,
-)
-
-cc_binary(
-    name = "search",
-    srcs = ["search/test-search.cc"],
-    deps = [
-        ":gtest",
-        ":search_lib",
-    ],
-    copts = [
-        "-Igtest/include", 
-        "-Igtest/include/gtest",
-        "-Igtest/include/gtest/internal",
-        "-Isearch/include", 
-    ],
-    linkstatic = 1,
-)
-
-cc_binary(
-    name = "benchmark_search",
-    srcs = ["search/benchmark-search.cc"],
-    deps = [
-        ":benchmark",
-        ":search_lib",
-    ],
-    copts = [
-        "-Ibenchmark/include", 
-        "-Isearch/include", 
-    ],
-    linkstatic = 1,
 )

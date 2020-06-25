@@ -1,0 +1,36 @@
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_binary")
+
+cc_library (
+    name = "lib_search",
+    srcs = glob(["libs/*.cc"]),
+    hdrs = glob(["include/*.h"]),
+    copts = [
+        "-Iprinciples/search/include", 
+    ],
+)
+
+cc_binary(
+    name = "search",
+    srcs = ["test-search.cc"],
+    deps = [
+        "@gtest//:gtest",
+        "//principles/search:lib_search",
+    ],
+    copts = [
+        "-Iprinciples/search/include", 
+    ],
+    linkstatic = 1,
+)
+
+cc_binary(
+    name = "benchmark_search",
+    srcs = ["benchmark-search.cc"],
+    deps = [
+        "//principles/search:lib_search",
+        "@benchmark//:benchmark",
+    ],
+    copts = [
+        "-Iprinciples/search/include", 
+    ],
+    linkstatic = 1,
+)
