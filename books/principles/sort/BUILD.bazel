@@ -1,0 +1,36 @@
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_binary")
+
+cc_library (
+    name = "lib_sort",
+    hdrs = glob(["include/*.h"]),
+    srcs = glob(["libs/*.cc"]),
+    copts = [
+        "-Iprinciples/sort/include", 
+    ],
+)
+
+cc_binary(
+    name = "sort",
+    srcs = ["test-sort.cc"],
+    deps = [
+        "@gtest//:gtest",
+        "//principles/sort:lib_sort",
+    ],
+    copts = [
+        "-Iprinciples/sort/include", 
+    ],
+    linkstatic = 1,
+)
+
+cc_binary(
+    name = "benchmark_sort",
+    srcs = ["benchmark-sort.cc"],
+    deps = [
+        "//principles/sort:lib_sort",
+        "@benchmark//:benchmark",
+    ],
+    copts = [
+        "-Iprinciples/sort/include", 
+    ],
+    linkstatic = 1,
+)
