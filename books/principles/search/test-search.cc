@@ -4,6 +4,7 @@
 
 #include "sequential-search.h"
 #include "binary-search-tree.h"
+#include "red-black-tree.h"
 
 TEST (SEQUENTIAL, TEST_CASE_001) {
     BaseSearch *search = new SequentialSearch();
@@ -49,6 +50,13 @@ TEST (BINARY_SEARCH_TREE, TEST_CASE_001) {
 
     EXPECT_EQ(search_target, test_search->data);
 
+}
+
+TEST (REDBLACKTREE, TEST_CASE_001) {
+    RedBlackTree *red_black_tree = new RedBlackTree();
+    red_black_tree->version_info();
+
+    EXPECT_EQ(0, 0);
 }
 
 int main (int argc, char *argv[]) {
