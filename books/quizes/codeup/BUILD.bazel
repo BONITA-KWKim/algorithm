@@ -1,0 +1,22 @@
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_binary")
+
+cc_library (
+    name = "lib_solution",
+    srcs = glob(["**/*.hpp"]),
+    hdrs = glob(["**/*.hpp"]),
+)
+
+cc_binary(
+    name = "solve",
+    srcs = ["solve.cc"],
+    deps = [
+        "@gtest//:gtest",
+        "//quizes/codeup:lib_solution",
+    ],
+    copts = [
+        "-Iquizes/codeup/1916_fibonazzi", 
+        "-Iquizes/codeup/3701.pascal_triangle", 
+        "-Iquizes/codeup/3733.Collatz", 
+    ],
+    linkstatic = 1,
+)
