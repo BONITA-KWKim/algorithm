@@ -135,8 +135,7 @@ dmypy.json
 *.so
 temp/
 third-party/
-gtest/
-benchmark/
+libboost/
 
 # build system
 mybuild/
