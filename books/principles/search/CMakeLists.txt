@@ -29,13 +29,16 @@ include_directories(${SEARCH_INC})
 #link_directories(${BENCHMARK_LIB})
 
 ## ========== library ==========
-set (SEARCH_LIB_FILES ${SEARCH_LIB}/binary-search.cc ${SEARCH_LIB}/binary-search-tree.cc ${SEARCH_LIB}/sequential-search.cc)
+set (SEARCH_LIB_FILES ${SEARCH_LIB}/binary-search.cc 
+                      ${SEARCH_LIB}/binary-search-tree.cc 
+                      ${SEARCH_LIB}/sequential-search.cc
+                      ${SEARCH_LIB}/red-black-tree.cc)
 add_library (tsearch STATIC ${SEARCH_LIB_FILES})
 
 ## ========== operating ==========
 set (SEARCH_FILES ${CMAKE_CURRENT_SOURCE_DIR}/test-search.cc ${SEARCH_LIB_FILES})
 add_executable (test_search ${SEARCH_FILES})
-target_link_libraries (test_search PUBLIC gtest)
+target_link_libraries (test_search PUBLIC gtest) 
 
 set (BENCHMARK_SEARCH_FILES ${CMAKE_CURRENT_SOURCE_DIR}/benchmark-search.cc ${SEARCH_LIB_FILES})
 add_executable (benchmark_search ${BENCHMARK_SEARCH_FILES})
