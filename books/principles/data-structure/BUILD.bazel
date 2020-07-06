@@ -4,3 +4,51 @@ cc_library (
     name = "tree_lib",
     hdrs = glob(["tree/include/*.h"]),
 )
+
+cc_library (
+    name = "queue_lib",
+    srcs = glob(
+        ["queue/*.cc"], 
+        exclude=["queue/test-queue.cc"],
+    ),
+    hdrs = glob(
+        ["queue/*.h"], 
+    ),
+)
+
+cc_library (
+    name = "heap_lib",
+    srcs = glob(
+        ["priority-queue-and-heap/*.cc"], 
+        exclude=["priority-queue-and-heap/test-heap.cc"],
+    ),
+    hdrs = glob(
+        ["priority-queue-and-heap/*.h"], 
+    ),
+)
+
+cc_binary (
+    name = "test_queue",
+    srcs = ["queue/test-queue.cc"],
+    deps = [
+        "@gtest//:gtest",
+        "//principles/data-structure:queue_lib",
+    ],
+    copts = [
+        "-Iprinciples/data-structure/queue", 
+    ],
+    linkstatic = 1,
+)
+
+cc_binary (
+    name = "test_heap",
+    srcs = ["priority-queue-and-heap/test-heap.cc"],
+    deps = [
+        "@gtest//:gtest",
+        "//principles/data-structure:heap_lib",
+    ],
+    copts = [
+        "-Iprinciples/data-structure/priority-queue-and-heap", 
+    ],
+    linkstatic = 1,
+)
