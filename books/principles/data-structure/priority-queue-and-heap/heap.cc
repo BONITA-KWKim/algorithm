@@ -28,11 +28,12 @@ void Heap::insert (HeapTree *heap, ElementType data) {
     if(0 == current_pos) return;
 
     // check heap rules
-    int parent_pos = ((current_pos-1)/2);
+    int parent_pos = this->get_parent(current_pos);
     while (0 <= parent_pos) {
         if(heap->nodes[current_pos].data < heap->nodes[parent_pos].data) {
             //swap(&(heap->nodes[current_pos]), &(heap->nodes[prarent_pos]));
             swap(heap, current_pos, parent_pos);
+            parent_pos = this->get_parent(current_pos);
         } else {
             break;
         }
@@ -54,30 +55,26 @@ void Heap::delete_min (HeapNode *node, HeapTree *heap) {
     --heap->used_size;
 
     // check
-    bool continue_flag = false;
     int current_pos = 0;
+    int next_pos = 0;
     while (true) {
-        continue_flag = false;
-        if (heap->nodes[current_pos*2+1].data < heap->nodes[current_pos].data) {
-            // left 
-            if(current_pos*2+1 >= heap->used_size) break;
-            //swap(heap->nodes[current_pos], heap->nodes[current_pos*2+1]);
-            swap(heap, current_pos, current_pos*2+1);
-            current_pos = current_pos*2+1;
-            continue_flag = true;
-        } 
-        
-        if  (heap->nodes[current_pos*2+2].data < heap->nodes[current_pos].data) {
-            // right;
-            if(current_pos*2+2 >= heap->used_size) break;
-            //swap(heap->nodes[current_pos], heap->nodes[current_pos*2+2]);
-            swap(heap, current_pos, current_pos*2+2);
-            current_pos = current_pos*2+2;
-            continue_flag = true;
-        } 
+                // next_pos is left child index, so (next_pos + 1)n is right child index
+        next_pos = current_pos*2+1;
+        // If children's index was over used size, stop this.
+        if(next_pos >= heap->used_size || next_pos + 1 >= heap->used_size) break;
+        // If right child's priority was under the left, next_pos would plus 1. 
+        // Go to right child
+        if (heap->nodes[next_pos].data > heap->nodes[next_pos+1].data) {
+            next_pos += 1;
+        }
 
-        if (true == continue_flag) continue;
-        else break;
+        if (heap->nodes[next_pos].data < heap->nodes[current_pos].data) {
+            swap(heap, current_pos, next_pos);
+            current_pos = next_pos;
+            continue;
+        }  
+        
+        break;
     }
 }
 
@@ -97,6 +94,10 @@ void Heap::swap(HeapNode *a, HeapNode *b) {
     memcpy(b, tmp, sizeof(HeapNode));
 }
 #endif
+
+int Heap::get_parent (int index) {
+    return ((index - 1) / 2);
+}
 
 void Heap::swap(HeapTree *heap, int idx1, int idx2) {
     int copy_size = sizeof(HeapNode);

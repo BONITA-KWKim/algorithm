@@ -3,25 +3,37 @@
 
 #include <iostream>
 
-typedef int ElementType;
+typedef int PriorityType;
 
-typedef struct tabHeapNode {
-    ElementType data;
-} HeapNode;
+typedef struct tabPQNode {
+    PriorityType priority;
+    void *data;
+} PQNode;
 
-typedef struct tabHeap {
-    HeapNode *nodes;
-    int capacity;
-    int used_size;
-} Heap;
+typedef struct tagTPriorityQueue {
+    PQNode *nodes;
+    unsigned int capacity;
+    unsigned int used_size;
+} TPriorityQueue;
 
 class PriorityQueue {
 public:
     PriorityQueue(){};
     ~PriorityQueue(){};
 
-    void insert (Heap *, ElementType);
-    void remove_min (Heap *, HeapNode *);
+    // create & destroy
+    TPriorityQueue *create (int capacity);
+    void destroy (TPriorityQueue *queue);
+    // enqueue & dequeue
+    void enqueue (TPriorityQueue *queue, PQNode newdata);
+    void dequeue (PQNode *result, TPriorityQueue *queue);
+
+    bool is_empty(TPriorityQueue *queue);
+
+    void print (TPriorityQueue *heap);
+private:
+    int get_parent(int index);
+    void swap(TPriorityQueue *queue, int index1, int index2);
 };
 
 #endif

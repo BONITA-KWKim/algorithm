@@ -34,7 +34,7 @@ public:
     // print
     void print (HeapTree *);
 private:
-    void swap (HeapNode *, HeapNode *);
+    int get_parent (int index);
     void swap (HeapTree *, int , int);
 };
 
