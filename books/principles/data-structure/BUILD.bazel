@@ -27,6 +27,17 @@ cc_library (
     ),
 )
 
+cc_library (
+    name = "graph_lib",
+    srcs = glob(
+        ["graph/*.cc"], 
+        exclude=["graph/test-graph.cc"],
+    ),
+    hdrs = glob(
+        ["graph/*.h"], 
+    ),
+)
+
 cc_binary (
     name = "test_queue",
     srcs = ["queue/test-queue.cc"],
@@ -49,6 +60,19 @@ cc_binary (
     ],
     copts = [
         "-Iprinciples/data-structure/priority-queue-and-heap", 
+    ],
+    linkstatic = 1,
+)
+
+cc_binary (
+    name = "test_graph",
+    srcs = ["graph/test-graph.cc"],
+    deps = [
+        "@gtest//:gtest",
+        "//principles/data-structure:graph_lib",
+    ],
+    copts = [
+        "-Iprinciples/data-structure/graph", 
     ],
     linkstatic = 1,
 )
